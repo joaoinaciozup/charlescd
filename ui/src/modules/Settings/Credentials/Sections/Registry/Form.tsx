@@ -107,11 +107,31 @@ const FormRegistry = ({ onFinish }: Props) => {
     );
   };
 
+  const renderGcpFields = () => {
+    unregister('accessKey');
+    unregister('secretKey');
+    unregister('region');
+
+    return (
+      <>
+        <Form.Input ref={register} name="applicationId" label="Enter the application Id" />
+        <Form.Password
+          ref={register}
+          name="jsonKey"
+          label="Enter the json key"
+        />
+      </>
+    );
+  };
+
   const handleFields = () => {
     if (registryType === 'AWS') {
       return renderAwsFields();
+    } else if (registryType === "AZURE") {
+      return renderAzureFields();
+    } else {
+      return renderGcpFields();
     }
-    return renderAzureFields();
   };
 
   const renderForm = () => (
