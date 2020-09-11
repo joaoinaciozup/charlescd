@@ -58,6 +58,18 @@ test('render Registry form with azure values', async () => {
   expect(container.innerHTML).toMatch("Enter the username");
 });
 
+test('render Registry form with gcp values', async () => {
+  const { container, getByTestId } = render(
+    <FormRegistry onFinish={mockOnFinish}/>
+  );
+
+  await wait();
+  const radioButton = getByTestId("radio-group-registry-item-GCP");
+  fireEvent.click(radioButton)
+  await wait();
+  expect(container.innerHTML).toMatch("Enter the application Id");
+});
+
 test('render Registry form with AWS values', async () => {
   const { container, getByTestId } = render(
     <FormRegistry onFinish={mockOnFinish}/>
